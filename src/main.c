@@ -53,11 +53,16 @@ int main() {
 	while(run)
 	{
 		handle_event();
-		// TODO: run simulation physics
 
-		// only redraw if the timer event has occurred
+		// only redraw or run simulation if the timer event has occurred
 		if(redraw)
 		{
+			/*
+			 * We only run the simulation when the timer goes off so it's
+			 * running at a consistent rate, rather than dependent on random
+			 * events.
+			 */
+			// TODO: run simulation physics
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			// TODO: run simulation draw functions
 			al_flip_display();

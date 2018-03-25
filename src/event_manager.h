@@ -18,6 +18,18 @@
 
 #pragma once
 
+enum {
+	KEY_UP          = 0x0,
+	KEY_DOWN        = 0x1,
+	KEY_LEFT        = 0x2,
+	KEY_RIGHT       = 0x3,
+	KEY_RESET       = 0x4,
+	KEY_HELP        = 0x5,
+	KEY_INFO        = 0x6,
+	KEY_FULLSCREEN  = 0x7,
+	KEY_MAX         = 0x8
+};
+
 /**
  * @brief Initialize the event handler.
  *
@@ -35,3 +47,12 @@ void evnt_mngr_deinit();
  * queue is empty).
  */
 void handle_event();
+
+/**
+ * @brief Receive state of a key.
+ *
+ * @param code The key code.
+ *
+ * @return If down 1 will be returned, else 0.
+ */
+int key_is_down(int code);
