@@ -1,2 +1,3 @@
-# Ignore binary files
-bin/
+# Ignore build files
+build/*
+!build/.keep

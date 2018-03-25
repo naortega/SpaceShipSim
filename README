@@ -1,0 +1,35 @@
+====================
+*** SpaceShipSim ***
+====================
+This is a small simulation program of a space ship (with infinite fuel) in a
+frictionless environment (space). The idea is to use it for educational
+purposes.
+
+# Compiling
+-----------
+In order to build this program you will require the following dependencies:
+
+ - GNU GCC (https://gcc.gnu.org/)
+ - CMake (https://cmake.org/)
+ - Allegro 5 (http://liballeg.org/)
+
+You can then compile the program via the following commands:
+
+  cd build/
+  cmake ..
+  make
+
+This will create a release build with compiler optimizations. If you would like
+a debug build then pass the `-DCMAKE_BUILD_TYPE=debug' flag to the `cmake'
+command.
+
+# Contributing
+--------------
+If you would like to contribute to the project, send a patch file to my e-mail
+address: <nortega@themusicinnoise.net>.
+
+# License
+---------
+As educational software, unless otherwise noted, all files are licensed under
+the terms & conditions of the GNU General Public License version 3 or greater
+(see `LICENSE' file for more information).
