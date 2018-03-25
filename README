@@ -21,7 +21,11 @@ You can then compile the program via the following commands:
 
 This will create a release build with compiler optimizations. If you would like
 a debug build then pass the `-DCMAKE_BUILD_TYPE=debug' flag to the `cmake'
-command.
+command. If you would like to install then run `cmake' with the additional flag
+`-DCMAKE_INSTALL_PREFIX=<install_dir>'. If you are installing as a user then
+you may want to set the installation prefix to `/usr/local/', and if you're
+packaging then please consult your distribution's policies. With this you
+should be able to run the `make install' target and install the binary.
 
 # Contributing
 --------------

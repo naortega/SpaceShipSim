@@ -33,8 +33,13 @@ set(CMAKE_C_FLAGS_RELEASE "-O3")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-g -O3")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
 
-# TODO: detect libraries here
-# TODO: set include directories here
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(ALLEG5 REQUIRED allegro-5)
+pkg_check_modules(ALLEG5-PRIM REQUIRED allegro_primitives-5)
+pkg_check_modules(ALLEG5-FONT REQUIRED allegro_font-5)
+
+include_directories(
+	SYSTEM ${ALLEG5_INCLUDE_DIRS})
 
 set(SRCS
 	src/main.c)
@@ -50,6 +55,11 @@ endif()
 
 add_executable(${TARGET_NAME} ${SRCS})
 
-# TODO: link libraries
+target_link_libraries(${TARGET_NAME}
+	${ALLEG5_LIBRARIES}
+	${ALLEG5-PRIM_LIBRARIES}
+	${ALLEG5-FONT_LIBRARIES})
 
-# TODO: create install instructions
+install(TARGETS ${TARGET_NAME}
+	RUNTIME DESTINATION bin/
+	CONFIGURATIONS release minsizerel)
