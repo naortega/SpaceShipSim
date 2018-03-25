@@ -1,0 +1,7 @@
+v0.1: First Release
+ - Basic simulation.
+ - Information printing.
+
+v0.2: Menu Bar
+ - Added a menu bar.
+ - Can reset the simulation.
