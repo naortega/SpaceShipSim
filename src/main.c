@@ -34,6 +34,7 @@ const char *help =
 	"HELP:\n"
 	"LEFT/RIGHT - turn the ship\n"
 	"UP/DOWN - accelerate/decelerate\n"
+	"R - reset the simulation\n"
 	"I - show/hide simulation information\n"
 	"H - show/hide this help information\n"
 	"Q/ESC - quit";
@@ -107,6 +108,8 @@ int main() {
 		// only redraw or run simulation if the timer event has occurred
 		if(redraw)
 		{
+			if(key_is_down(KEY_RESET))
+				ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 			/*
 			 * We only run the simulation when the timer goes off so it's
 			 * running at a consistent rate, rather than dependent on random
