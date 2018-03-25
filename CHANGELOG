@@ -5,3 +5,6 @@ v0.1: First Release
 v0.2: Menu Bar
  - Added a menu bar.
  - Can reset the simulation.
+
+v0.3: Port to C
+ - Codebase ported to C for better performance.
