@@ -28,7 +28,7 @@
 #	define M_PI 3.14159265f
 #endif
 
-#define ACCEL 5.0f
+#define ACCEL 10.0f
 #define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
@@ -54,9 +54,9 @@ void ship_update(struct ship *ship) {
 		ship->velY -= sin(ship->direction) * (ACCEL / 2);
 	}
 	if(key_is_down(KEY_RIGHT))
-		ship->direction -= TURN_ACCEL;
-	if(key_is_down(KEY_LEFT))
 		ship->direction += TURN_ACCEL;
+	if(key_is_down(KEY_LEFT))
+		ship->direction -= TURN_ACCEL;
 
 	// keep direction within bounds
 	if(ship->direction >= M_PI * 2)
