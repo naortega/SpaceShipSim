@@ -29,8 +29,6 @@
 #	define M_PI 3.14159265f
 #endif
 
-#define ACCEL 0.5f
-#define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
 void ship_init(struct ship *ship, int x, int y) {

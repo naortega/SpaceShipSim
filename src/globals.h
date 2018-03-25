@@ -25,6 +25,19 @@
 #ifndef FPS
 #	define FPS 60.0f
 #endif
+#ifndef ACCEL
+#	define ACCEL 0.5f
+#endif
+#ifndef TURN_ACCEL
+#	define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
+#endif
+
+#ifndef WINDOW_WIDTH
+#	define WINDOW_WIDTH 800
+#endif
+#ifndef WINDOW_HEIGHT
+#	define WINDOW_HEIGHT 600
+#endif
 
 #include <allegro5/allegro.h>
 

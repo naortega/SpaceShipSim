@@ -28,6 +28,14 @@ int show_info;
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_font.h>
+
+const char *help =
+	"HELP:\n"
+	"LEFT/RIGHT - turn the ship\n"
+	"UP/DOWN - accelerate/decelerate\n"
+	"H - show/hide this help information\n"
+	"Q/ESC - quit";
 
 int main() {
 	printf("SpaceShipSim v%s\n", VERSION);
@@ -49,7 +57,13 @@ int main() {
 	puts("Initialized primitives addon.");
 #endif
 
-	ALLEGRO_DISPLAY *display = al_create_display(800, 600);
+	if(!al_init_font_addon())
+	{
+		fprintf(stderr, "alleg5: failed to initialize font addon.\n");
+		return 1;
+	}
+
+	ALLEGRO_DISPLAY *display = al_create_display(WINDOW_WIDTH, WINDOW_HEIGHT);
 	if(!display)
 	{
 		fprintf(stderr, "alleg5: failed to initialize display.\n");
@@ -69,6 +83,8 @@ int main() {
 	// initialize the spaceship at the center of the screen
 	struct ship ship;
 	ship_init(&ship, 400, 300);
+
+	ALLEGRO_FONT *font = al_create_builtin_font();
 
 	// begin running the simulation
 	run = 1;
@@ -97,17 +113,27 @@ int main() {
 
 			if(show_help)
 			{
-				// TODO: draw help information
+				al_draw_multiline_text(font,
+						al_map_rgb(0xFF, 0xFF, 0xFF),
+						WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
+						WINDOW_WIDTH, 10.0f,
+						ALLEGRO_ALIGN_CENTRE,
+						help);
 			}
 			al_flip_display();
 			redraw = 0;
 		}
 	}
 
+	al_destroy_font(font);
 	evnt_mngr_deinit();
 	al_destroy_display(display);
 #ifdef DEBUG
 	puts("Destroyed display.");
+#endif
+	al_shutdown_font_addon();
+#ifdef DEBUG
+	puts("Shutdown font addon.");
 #endif
 	al_shutdown_primitives_addon();
 #ifdef DEBUG

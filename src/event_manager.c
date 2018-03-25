@@ -123,6 +123,9 @@ void handle_event() {
 				show_help = !show_help;
 			else if(evnt.keyboard.keycode == ALLEGRO_KEY_I)
 				show_info = !show_info;
+			else if(evnt.keyboard.keycode == ALLEGRO_KEY_Q ||
+					evnt.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+				run = 0;
 			else
 				set_key(evnt.keyboard.keycode, 1);
 			break;
