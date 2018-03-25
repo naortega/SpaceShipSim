@@ -24,7 +24,8 @@ int run;
 int redraw;
 
 #include <stdio.h>
-#include<allegro5/allegro.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_primitives.h>
 
 int main() {
 	printf("SpaceShipSim v%s\n", VERSION);
@@ -32,6 +33,11 @@ int main() {
 	if(!al_init())
 	{
 		fprintf(stderr, "alleg5: failed to initialize Allegro.\n");
+		return 1;
+	}
+	if(!al_init_primitives_addon())
+	{
+		fprintf(stderr, "alleg5: failed to initialize primitives addon.\n");
 		return 1;
 	}
 	if(!create_display(800, 600))
@@ -72,6 +78,7 @@ int main() {
 
 	evnt_mngr_deinit();
 	destroy_display();
+	al_shutdown_primitives_addon();
 
 	return 0;
 }
