@@ -95,12 +95,6 @@ void set_key(int keycode, int value) {
 		case ALLEGRO_KEY_R:
 			key_index = KEY_RESET;
 			break;
-		case ALLEGRO_KEY_H:
-			key_index = KEY_HELP;
-			break;
-		case ALLEGRO_KEY_I:
-			key_index = KEY_INFO;
-			break;
 		case ALLEGRO_KEY_F:
 			key_index = KEY_FULLSCREEN;
 			break;
@@ -125,7 +119,12 @@ void handle_event() {
 			run = 0;
 			break;
 		case ALLEGRO_EVENT_KEY_DOWN:
-			set_key(evnt.keyboard.keycode, 1);
+			if(evnt.keyboard.keycode == ALLEGRO_KEY_H)
+				show_help = !show_help;
+			else if(evnt.keyboard.keycode == ALLEGRO_KEY_I)
+				show_info = !show_info;
+			else
+				set_key(evnt.keyboard.keycode, 1);
 			break;
 		case ALLEGRO_EVENT_KEY_UP:
 			set_key(evnt.keyboard.keycode, 0);
