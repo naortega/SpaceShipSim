@@ -23,7 +23,12 @@
 #endif
 
 #ifndef FPS
-#	define FPS 60
+#	define FPS 60.0f
 #endif
 
+#include <allegro5/allegro.h>
+
+extern ALLEGRO_DISPLAY *display; ///< The allegro display.
+
+extern int redraw; ///< Whether or not to redraw the screen.
 extern int run; ///< Whether or not to continue running the simulation.

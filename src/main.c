@@ -18,8 +18,10 @@
 
 #include "globals.h"
 #include "display.h"
+#include "event_manager.h"
 
 int run;
+int redraw;
 
 #include <stdio.h>
 #include<allegro5/allegro.h>
@@ -38,18 +40,32 @@ int main() {
 		return 1;
 	}
 
-	// begin running the simulation
-	run = 1;
-
-	while(run)
+	if(!evnt_mngr_init())
 	{
-		// TODO: handle events
-		// TODO: run simulation physics
-		al_clear_to_color(al_map_rgb(0, 0, 0));
-		// TODO: run simulation draw functions
-		al_flip_display();
+		fprintf(stderr, "alleg5: failed to initialize event queue.\n");
+		destroy_display();
+		return 1;
 	}
 
+	// begin running the simulation
+	run = 1;
+	redraw = 1;
+	while(run)
+	{
+		handle_event();
+		// TODO: run simulation physics
+
+		// only redraw if the timer event has occurred
+		if(redraw)
+		{
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+			// TODO: run simulation draw functions
+			al_flip_display();
+			redraw = 0;
+		}
+	}
+
+	evnt_mngr_deinit();
 	destroy_display();
 
 	return 0;

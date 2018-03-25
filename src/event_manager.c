@@ -16,28 +16,56 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "display.h"
+#include "event_manager.h"
+#include "globals.h"
 
 #ifdef DEBUG
 #	include <stdio.h>
 #endif
 #include <allegro5/allegro.h>
 
-ALLEGRO_DISPLAY *display;
+static ALLEGRO_EVENT_QUEUE *event_queue;
+static ALLEGRO_TIMER *timer;
 
-int create_display(unsigned int width, unsigned int height) {
-	display = al_create_display(width, height);
-	if(!display)
+int evnt_mngr_init() {
+	timer = al_create_timer(1.0f / FPS);
+	if(!timer)
 		return 0;
 #ifdef DEBUG
-	puts("Initialized display.");
+	puts("Initialized timer.");
 #endif
+
+	event_queue = al_create_event_queue();
+	if(!event_queue)
+		return 0;
+#ifdef DEBUG
+	puts("Initialized event queue.");
+#endif
+	al_register_event_source(event_queue,
+			al_get_display_event_source(display));
+	al_register_event_source(event_queue,
+			al_get_timer_event_source(timer));
+	al_start_timer(timer);
 	return 1;
 }
 
-void destroy_display() {
-	al_destroy_display(display);
+void evnt_mngr_deinit() {
+	al_destroy_timer(timer);
 #ifdef DEBUG
-	puts("Destroyed display.");
+	puts("Destroyed timer.");
 #endif
+	al_destroy_event_queue(event_queue);
+#ifdef DEBUG
+	puts("Destroyed event queue.");
+#endif
+}
+
+void handle_event() {
+	ALLEGRO_EVENT evnt;
+	al_wait_for_event(event_queue, &evnt);
+
+	if(evnt.type == ALLEGRO_EVENT_TIMER)
+		redraw = 1;
+	else if(evnt.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+		run = 0;
 }

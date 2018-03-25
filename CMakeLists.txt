@@ -42,8 +42,9 @@ include_directories(
 	SYSTEM ${ALLEG5_INCLUDE_DIRS})
 
 set(SRCS
-	src/main.c
-	src/display.c)
+	src/display.c
+	src/event_manager.c
+	src/main.c)
 
 add_definitions(-DVERSION="${TARGET_VERSION}")
 

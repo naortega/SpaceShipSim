@@ -16,28 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "display.h"
+#pragma once
 
-#ifdef DEBUG
-#	include <stdio.h>
-#endif
-#include <allegro5/allegro.h>
+/**
+ * @brief Initialize the event handler.
+ *
+ * @return 0 upon failure, 1 upon success.
+ */
+int evnt_mngr_init();
 
-ALLEGRO_DISPLAY *display;
+/**
+ * @brief Deinitialize the event handler.
+ */
+void evnt_mngr_deinit();
 
-int create_display(unsigned int width, unsigned int height) {
-	display = al_create_display(width, height);
-	if(!display)
-		return 0;
-#ifdef DEBUG
-	puts("Initialized display.");
-#endif
-	return 1;
-}
-
-void destroy_display() {
-	al_destroy_display(display);
-#ifdef DEBUG
-	puts("Destroyed display.");
-#endif
-}
+/**
+ * @brief Handle the next event in the queue (wait if the
+ * queue is empty).
+ */
+void handle_event();
