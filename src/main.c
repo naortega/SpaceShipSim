@@ -17,7 +17,6 @@
  */
 
 #include "globals.h"
-#include "display.h"
 #include "event_manager.h"
 #include "ship.h"
 
@@ -38,23 +37,32 @@ int main() {
 		fprintf(stderr, "alleg5: failed to initialize Allegro.\n");
 		return 1;
 	}
+#ifdef DEBUG
+	puts("Initialized allegro system.");
+#endif
 	if(!al_init_primitives_addon())
 	{
 		fprintf(stderr, "alleg5: failed to initialize primitives addon.\n");
 		return 1;
 	}
+#ifdef DEBUG
+	puts("Initialized primitives addon.");
+#endif
 
-	ALLEGRO_DISPLAY *display;
-	if(!create_display(display, 800, 600))
+	ALLEGRO_DISPLAY *display = al_create_display(800, 600);
+	if(!display)
 	{
-		fprintf(stderr, "alleg5: failed to create display.\n");
+		fprintf(stderr, "alleg5: failed to initialize display.\n");
 		return 1;
 	}
+#ifdef DEBUG
+	puts("Created display.");
+#endif
 
 	if(!evnt_mngr_init(display))
 	{
 		fprintf(stderr, "alleg5: failed to initialize event queue.\n");
-		destroy_display(display);
+		al_destroy_display(display);
 		return 1;
 	}
 
@@ -81,7 +89,7 @@ int main() {
 			 */
 			ship_update(&ship);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
-			// TODO: run simulation draw functions
+			ship_draw(&ship);
 			if(show_info)
 			{
 				// TODO: draw simulation stats
@@ -97,7 +105,7 @@ int main() {
 	}
 
 	evnt_mngr_deinit();
-	destroy_display(display);
+	al_destroy_display(display);
 	al_shutdown_primitives_addon();
 #ifdef DEBUG
 	puts("Shutdown primitives addon.");

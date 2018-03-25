@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <allegro5/allegro.h>
+
 struct ship {
 	float x, y; ///< The x and y coordinates of the ship.
 	float velX, velY; ///< The x and y velocities of the ship.
@@ -44,3 +46,10 @@ void ship_init(struct ship *ship, int x, int y);
  * @param ship A pointer to the ship object.
  */
 void ship_update(struct ship *ship);
+
+/**
+ * @brief Draw the ship.
+ *
+ * @param ship Ship object to draw.
+ */
+void ship_draw(struct ship *ship);

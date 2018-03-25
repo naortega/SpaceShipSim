@@ -42,7 +42,6 @@ include_directories(
 	SYSTEM ${ALLEG5_INCLUDE_DIRS})
 
 set(SRCS
-	src/display.c
 	src/event_manager.c
 	src/main.c
 	src/ship.c)

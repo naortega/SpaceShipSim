@@ -33,6 +33,9 @@ enum {
 /**
  * @brief Initialize the event handler.
  *
+ * @param display A pointer to the display (used to get
+ * event source).
+ *
  * @return 0 upon failure, 1 upon success.
  */
 int evnt_mngr_init(ALLEGRO_DISPLAY *display);

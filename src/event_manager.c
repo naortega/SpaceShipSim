@@ -23,6 +23,7 @@
 #	include <stdio.h>
 #endif
 #include <stddef.h>
+#include <assert.h>
 #include <allegro5/allegro.h>
 
 static ALLEGRO_EVENT_QUEUE *event_queue;
@@ -30,6 +31,7 @@ static ALLEGRO_TIMER *timer;
 static int keys[KEY_MAX];
 
 int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
+	assert(display);
 	if(!al_install_keyboard())
 		return 0;
 #ifdef DEBUG
@@ -133,13 +135,6 @@ void handle_event() {
 }
 
 int key_is_down(int code) {
-	if(code < 0 || code >= KEY_MAX)
-	{
-#ifdef DEBUG
-		fprintf(stderr, "key_is_down(int): bad key code!\n");
-#endif
-		return 0;
-	}
-	else
-		return keys[code];
+	assert(code >= 0 && code <= KEY_MAX);
+	return keys[code];
 }

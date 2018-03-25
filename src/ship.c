@@ -20,10 +20,9 @@
 #include "event_manager.h"
 #include "globals.h"
 
-#ifdef DEBUG
-#	include <stdio.h>
-#endif
 #include <math.h>
+#include <assert.h>
+#include <allegro5/allegro_primitives.h>
 
 #ifndef M_PI
 #	define M_PI 3.14159265f
@@ -31,16 +30,10 @@
 
 #define ACCEL 5.0f
 #define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
+#define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
 void ship_init(struct ship *ship, int x, int y) {
-	if(!ship)
-	{
-#ifdef DEBUG
-		fprintf(stderr,
-				"ship_init(struct ship*,int,int): invalid ship.\n");
-#endif
-		return;
-	}
+	assert(ship);
 	ship->x = x;
 	ship->y = y;
 	ship->velX = ship->velY = 0;
@@ -48,15 +41,7 @@ void ship_init(struct ship *ship, int x, int y) {
 }
 
 void ship_update(struct ship *ship) {
-	if(!ship)
-	{
-#ifdef DEBUG
-		fprintf(stderr,
-				"ship_update(struct ship*): invalid ship.\n");
-#endif
-		return;
-	}
-
+	assert(ship);
 	if(key_is_down(KEY_UP))
 	{
 		ship->velX += cos(ship->direction) * ACCEL;
@@ -78,4 +63,22 @@ void ship_update(struct ship *ship) {
 		ship->direction -= M_PI * 2;
 	else if(ship->direction < 0)
 		ship->direction += M_PI * 2;
+}
+
+void ship_draw(struct ship *ship) {
+	assert(ship);
+	const float x0 = ship->x + (cos(ship->direction) *
+			SHIP_RADIUS);
+	const float y0 = ship->y + (sin(ship->direction) *
+			SHIP_RADIUS);
+	const float x1 = ship->x + (cos(ship->direction +
+				M_PI * 0.8f) * SHIP_RADIUS);
+	const float y1 = ship->y + (sin(ship->direction +
+				M_PI * 0.8f) * SHIP_RADIUS);
+	const float x2 = ship->x + (cos(ship->direction +
+				M_PI * 1.2f) * SHIP_RADIUS);
+	const float y2 = ship->y + (sin(ship->direction +
+				M_PI * 1.2f) * SHIP_RADIUS);
+	al_draw_filled_triangle(x0, y0, x1, y1, x2, y2,
+			al_map_rgb(0xFF, 0x0, 0x0));
 }
