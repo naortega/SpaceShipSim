@@ -34,8 +34,17 @@ const char *help =
 	"HELP:\n"
 	"LEFT/RIGHT - turn the ship\n"
 	"UP/DOWN - accelerate/decelerate\n"
+	"I - show/hide simulation information\n"
 	"H - show/hide this help information\n"
 	"Q/ESC - quit";
+
+const char *info_format =
+	"INFO:\n"
+	"x: %f\n"
+	"y: %f\n"
+	"angle: %f (%f degrees)\n"
+	"velX: %f\n"
+	"velY: %f";
 
 int main() {
 	printf("SpaceShipSim v%s\n", VERSION);
@@ -108,7 +117,17 @@ int main() {
 			ship_draw(&ship);
 			if(show_info)
 			{
-				// TODO: draw simulation stats
+				char info[256];
+				sprintf(info, info_format,
+						ship.x, ship.y,
+						ship.direction,
+						RAD_TO_DEG(ship.direction),
+						ship.velX, ship.velY);
+				al_draw_multiline_text(font,
+						al_map_rgb(0xFF, 0xFF, 0xFF),
+						5, 5, WINDOW_WIDTH, 10.0f,
+						ALLEGRO_ALIGN_LEFT,
+						info);
 			}
 
 			if(show_help)

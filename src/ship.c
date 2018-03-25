@@ -25,10 +25,6 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
 
-#ifndef M_PI
-#	define M_PI 3.14159265f
-#endif
-
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
 void ship_init(struct ship *ship, int x, int y) {

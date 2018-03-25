@@ -39,6 +39,13 @@
 #	define WINDOW_HEIGHT 600
 #endif
 
+#include <math.h>
+#ifndef M_PI
+#	define M_PI 3.14159265f
+#endif
+
+#define RAD_TO_DEG(x) (x * 180 / M_PI)
+
 #include <allegro5/allegro.h>
 
 extern int redraw; ///< Whether or not to redraw the screen.
