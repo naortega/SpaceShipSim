@@ -106,6 +106,9 @@ int main() {
 
 	evnt_mngr_deinit();
 	al_destroy_display(display);
+#ifdef DEBUG
+	puts("Destroyed display.");
+#endif
 	al_shutdown_primitives_addon();
 #ifdef DEBUG
 	puts("Shutdown primitives addon.");

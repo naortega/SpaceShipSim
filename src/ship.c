@@ -23,12 +23,13 @@
 #include <math.h>
 #include <assert.h>
 #include <allegro5/allegro_primitives.h>
+#include <stdio.h>
 
 #ifndef M_PI
 #	define M_PI 3.14159265f
 #endif
 
-#define ACCEL 10.0f
+#define ACCEL 0.5f
 #define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
@@ -42,6 +43,18 @@ void ship_init(struct ship *ship, int x, int y) {
 
 void ship_update(struct ship *ship) {
 	assert(ship);
+
+	if(key_is_down(KEY_RIGHT))
+		ship->direction += TURN_ACCEL;
+	if(key_is_down(KEY_LEFT))
+		ship->direction -= TURN_ACCEL;
+
+	// keep direction within bounds
+	if(ship->direction >= M_PI * 2)
+		ship->direction -= M_PI * 2;
+	else if(ship->direction < 0)
+		ship->direction += M_PI * 2;
+
 	if(key_is_down(KEY_UP))
 	{
 		ship->velX += cos(ship->direction) * ACCEL;
@@ -53,16 +66,9 @@ void ship_update(struct ship *ship) {
 		ship->velX -= cos(ship->direction) * (ACCEL / 2);
 		ship->velY -= sin(ship->direction) * (ACCEL / 2);
 	}
-	if(key_is_down(KEY_RIGHT))
-		ship->direction += TURN_ACCEL;
-	if(key_is_down(KEY_LEFT))
-		ship->direction -= TURN_ACCEL;
 
-	// keep direction within bounds
-	if(ship->direction >= M_PI * 2)
-		ship->direction -= M_PI * 2;
-	else if(ship->direction < 0)
-		ship->direction += M_PI * 2;
+	ship->x += ship->velX;
+	ship->y += ship->velY;
 }
 
 void ship_draw(struct ship *ship) {
