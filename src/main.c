@@ -19,9 +19,12 @@
 #include "globals.h"
 #include "display.h"
 #include "event_manager.h"
+#include "ship.h"
 
 int run;
 int redraw;
+int show_help;
+int show_info;
 
 #include <stdio.h>
 #include <allegro5/allegro.h>
@@ -53,9 +56,15 @@ int main() {
 		return 1;
 	}
 
+	// initialize the spaceship at the center of the screen
+	struct ship ship;
+	ship_init(&ship, 400, 300);
+
 	// begin running the simulation
 	run = 1;
 	redraw = 1;
+	show_help = 1;
+	show_info = 1;
 	while(run)
 	{
 		handle_event();
@@ -68,9 +77,18 @@ int main() {
 			 * running at a consistent rate, rather than dependent on random
 			 * events.
 			 */
-			// TODO: run simulation physics
+			ship_update(&ship);
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			// TODO: run simulation draw functions
+			if(show_info)
+			{
+				// TODO: draw simulation stats
+			}
+
+			if(show_help)
+			{
+				// TODO: draw help information
+			}
 			al_flip_display();
 			redraw = 0;
 		}

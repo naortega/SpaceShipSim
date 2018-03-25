@@ -18,19 +18,29 @@
 
 #pragma once
 
-#ifndef VERSION
-#	define VERSION "[version]"
-#endif
+struct ship {
+	float x, y; ///< The x and y coordinates of the ship.
+	float velX, velY; ///< The x and y velocities of the ship.
+	/**
+	 * The direction that the ship is facing in radians, where
+	 * 0 is right facing.
+	 */
+	float direction;
+};
 
-#ifndef FPS
-#	define FPS 60.0f
-#endif
+/**
+ * @brief Initialize the ship at a position.
+ *
+ * @param ship A pointer to the ship object.
+ * @param x Initial x position of the ship.
+ * @param y Initial y position of the ship.
+ */
+void ship_init(struct ship *ship, int x, int y);
 
-#include <allegro5/allegro.h>
-
-extern ALLEGRO_DISPLAY *display; ///< The allegro display.
-
-extern int redraw; ///< Whether or not to redraw the screen.
-extern int run; ///< Whether or not to continue running the simulation.
-extern int show_help; ///< Whether or not to show the help info.
-extern int show_info; ///< Whether or not to show simulation info.
+/**
+ * @brief Updates the ship's variables according to keyboard
+ * input.
+ *
+ * @param ship A pointer to the ship object.
+ */
+void ship_update(struct ship *ship);
