@@ -135,7 +135,12 @@ void handle_event() {
 
 int key_is_down(int code) {
 	if(code < 0 || code >= KEY_MAX)
-		return -1;
+	{
+#ifdef DEBUG
+		fprintf(stderr, "key_is_down(int): bad key code!\n");
+#endif
+		return 0;
+	}
 	else
 		return keys[code];
 }
