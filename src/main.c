@@ -43,16 +43,18 @@ int main() {
 		fprintf(stderr, "alleg5: failed to initialize primitives addon.\n");
 		return 1;
 	}
-	if(!create_display(800, 600))
+
+	ALLEGRO_DISPLAY *display;
+	if(!create_display(display, 800, 600))
 	{
 		fprintf(stderr, "alleg5: failed to create display.\n");
 		return 1;
 	}
 
-	if(!evnt_mngr_init())
+	if(!evnt_mngr_init(display))
 	{
 		fprintf(stderr, "alleg5: failed to initialize event queue.\n");
-		destroy_display();
+		destroy_display(display);
 		return 1;
 	}
 
@@ -95,7 +97,7 @@ int main() {
 	}
 
 	evnt_mngr_deinit();
-	destroy_display();
+	destroy_display(display);
 	al_shutdown_primitives_addon();
 #ifdef DEBUG
 	puts("Shutdown primitives addon.");

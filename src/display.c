@@ -21,11 +21,9 @@
 #ifdef DEBUG
 #	include <stdio.h>
 #endif
-#include <allegro5/allegro.h>
 
-ALLEGRO_DISPLAY *display;
-
-int create_display(unsigned int width, unsigned int height) {
+int create_display(ALLEGRO_DISPLAY *display,
+		unsigned int width, unsigned int height) {
 	display = al_create_display(width, height);
 	if(!display)
 		return 0;
@@ -35,7 +33,7 @@ int create_display(unsigned int width, unsigned int height) {
 	return 1;
 }
 
-void destroy_display() {
+void destroy_display(ALLEGRO_DISPLAY *display) {
 	al_destroy_display(display);
 #ifdef DEBUG
 	puts("Destroyed display.");

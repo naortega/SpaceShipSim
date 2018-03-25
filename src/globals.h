@@ -28,8 +28,6 @@
 
 #include <allegro5/allegro.h>
 
-extern ALLEGRO_DISPLAY *display; ///< The allegro display.
-
 extern int redraw; ///< Whether or not to redraw the screen.
 extern int run; ///< Whether or not to continue running the simulation.
 extern int show_help; ///< Whether or not to show the help info.

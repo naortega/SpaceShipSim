@@ -29,7 +29,7 @@ static ALLEGRO_EVENT_QUEUE *event_queue;
 static ALLEGRO_TIMER *timer;
 static int keys[KEY_MAX];
 
-int evnt_mngr_init() {
+int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
 	if(!al_install_keyboard())
 		return 0;
 #ifdef DEBUG

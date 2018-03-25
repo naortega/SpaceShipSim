@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <allegro5/allegro.h>
+
 enum {
 	KEY_UP          = 0x0,
 	KEY_DOWN        = 0x1,
@@ -33,7 +35,7 @@ enum {
  *
  * @return 0 upon failure, 1 upon success.
  */
-int evnt_mngr_init();
+int evnt_mngr_init(ALLEGRO_DISPLAY *display);
 
 /**
  * @brief Deinitialize the event handler.

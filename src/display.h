@@ -18,17 +18,23 @@
 
 #pragma once
 
+#include <allegro5/allegro.h>
+
 /**
  * @brief Create an allegro 5 display with a given width and height.
  *
+ * @param display The display to create.
  * @param width The width of the display.
  * @param height The height of the display.
  *
  * @return If successful it will return 1, else it will return 0.
  */
-int create_display(unsigned int width, unsigned int height);
+int create_display(ALLEGRO_DISPLAY *display,
+		unsigned int width, unsigned int height);
 
 /**
  * @brief Destroy the display (used for shutdown).
+ *
+ * @param display The display to destroy.
  */
-void destroy_display();
+void destroy_display(ALLEGRO_DISPLAY *display);
