@@ -53,6 +53,7 @@ void handle_event();
  *
  * @param code The key code.
  *
- * @return If down 1 will be returned, else 0.
+ * @return If down 1 will be returned, if the keycode is
+ * invalid then -1 is returned, else 0.
  */
 int key_is_down(int code);

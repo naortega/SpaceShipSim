@@ -132,3 +132,10 @@ void handle_event() {
 			break;
 	}
 }
+
+int key_is_down(int code) {
+	if(code < 0 || code >= KEY_MAX)
+		return -1;
+	else
+		return keys[code];
+}
