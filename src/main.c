@@ -79,6 +79,9 @@ int main() {
 	evnt_mngr_deinit();
 	destroy_display();
 	al_shutdown_primitives_addon();
+#ifdef DEBUG
+	puts("Shutdown primitives addon.");
+#endif
 
 	return 0;
 }
