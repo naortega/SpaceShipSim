@@ -58,6 +58,8 @@ int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
 			al_get_display_event_source(display));
 	al_register_event_source(event_queue,
 			al_get_timer_event_source(timer));
+	al_register_event_source(event_queue,
+			al_get_keyboard_event_source());
 	al_start_timer(timer);
 
 	// set all keys to false at initialization
@@ -79,33 +81,29 @@ void evnt_mngr_deinit() {
 }
 
 void set_key(int keycode, int value) {
-	int key_index = -1;
 	switch(keycode)
 	{
 		case ALLEGRO_KEY_UP:
-			key_index = KEY_UP;
+			keys[KEY_UP] = value;
 			break;
 		case ALLEGRO_KEY_DOWN:
-			key_index = KEY_DOWN;
+			keys[KEY_DOWN] = value;
 			break;
 		case ALLEGRO_KEY_LEFT:
-			key_index = KEY_LEFT;
+			keys[KEY_LEFT] = value;
 			break;
 		case ALLEGRO_KEY_RIGHT:
-			key_index = KEY_RIGHT;
+			keys[KEY_RIGHT] = value;
 			break;
 		case ALLEGRO_KEY_R:
-			key_index = KEY_RESET;
+			keys[KEY_RESET] = value;
 			break;
 		case ALLEGRO_KEY_F:
-			key_index = KEY_FULLSCREEN;
+			keys[KEY_FULLSCREEN] = value;
 			break;
 		default:
-			key_index = -1;
 			break;
 	}
-	if(key_index != -1)
-		keys[key_index] = value;
 }
 
 void handle_event() {
