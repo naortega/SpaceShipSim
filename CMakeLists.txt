@@ -29,8 +29,8 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -Werror")
 set(CMAKE_C_FLAGS_DEBUG "-g -O0")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-g -O3")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -ffast-math")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-g -O3 -ffast-math")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
 
 find_package(PkgConfig REQUIRED)
@@ -44,7 +44,8 @@ include_directories(
 set(SRCS
 	src/display.c
 	src/event_manager.c
-	src/main.c)
+	src/main.c
+	src/ship.c)
 
 add_definitions(-DVERSION="${TARGET_VERSION}")
 
@@ -58,6 +59,7 @@ endif()
 add_executable(${TARGET_NAME} ${SRCS})
 
 target_link_libraries(${TARGET_NAME}
+	m  # math library
 	${ALLEG5_LIBRARIES}
 	${ALLEG5-PRIM_LIBRARIES}
 	${ALLEG5-FONT_LIBRARIES})
