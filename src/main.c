@@ -16,11 +16,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-
 #include "globals.h"
+#include "display.h"
+
+int run;
+
+#include <stdio.h>
+#include<allegro5/allegro.h>
 
 int main() {
 	printf("SpaceShipSim v%s\n", VERSION);
+
+	if(!al_init())
+	{
+		fprintf(stderr, "alleg5: failed to initialize Allegro.\n");
+		return 1;
+	}
+	if(!create_display(800, 600))
+	{
+		fprintf(stderr, "alleg5: failed to create display.\n");
+		return 1;
+	}
+
+	// begin running the simulation
+	run = 1;
+
+	while(run)
+	{
+		// TODO: handle events
+		// TODO: run simulation physics
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		// TODO: run simulation draw functions
+		al_flip_display();
+	}
+
+	destroy_display();
+
 	return 0;
 }

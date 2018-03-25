@@ -18,12 +18,17 @@
 
 #pragma once
 
-#ifndef VERSION
-#	define VERSION "[version]"
-#endif
+/**
+ * @brief Create an allegro 5 display with a given width and height.
+ *
+ * @param width The width of the display.
+ * @param height The height of the display.
+ *
+ * @return If successful it will return 1, else it will return 0.
+ */
+int create_display(unsigned int width, unsigned int height);
 
-#ifndef FPS
-#	define FPS 60
-#endif
-
-extern int run; ///< Whether or not to continue running the simulation.
+/**
+ * @brief Destroy the display (used for shutdown).
+ */
+void destroy_display();

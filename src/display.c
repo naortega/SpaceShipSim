@@ -16,14 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "display.h"
 
-#ifndef VERSION
-#	define VERSION "[version]"
-#endif
+#include <stdio.h>
+#include <allegro5/allegro.h>
 
-#ifndef FPS
-#	define FPS 60
-#endif
+static ALLEGRO_DISPLAY *display;
 
-extern int run; ///< Whether or not to continue running the simulation.
+int create_display(unsigned int width, unsigned int height) {
+	display = al_create_display(width, height);
+	if(!display)
+		return 0;
+	return 1;
+}
+
+void destroy_display() {
+	al_destroy_display(display);
+}
