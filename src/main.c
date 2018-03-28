@@ -48,7 +48,9 @@ const char *info_format =
 	"velY: %f";
 
 int main() {
-	printf("SpaceShipSim v%s\n", VERSION);
+	char title[32];
+	sprintf(title, "SpaceShipSim v%s", VERSION);
+	puts(title);
 
 	if(!al_init())
 	{
@@ -79,6 +81,7 @@ int main() {
 		fprintf(stderr, "alleg5: failed to initialize display.\n");
 		return 1;
 	}
+	al_set_window_title(display, title);
 #ifdef DEBUG
 	puts("Created display.");
 #endif
