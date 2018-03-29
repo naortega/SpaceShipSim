@@ -26,7 +26,7 @@
 #	define FPS 60.0f
 #endif
 #ifndef ACCEL
-#	define ACCEL 0.5f
+#	define ACCEL 0.1f
 #endif
 #ifndef TURN_ACCEL
 #	define TURN_ACCEL (M_PI / FPS)  // turn at pi radians / sec
