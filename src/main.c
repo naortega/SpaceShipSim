@@ -137,7 +137,7 @@ int main() {
 			{
 				al_draw_multiline_text(font,
 						al_map_rgb(0xFF, 0xFF, 0xFF),
-						WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
+						WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 50,
 						WINDOW_WIDTH, 10.0f,
 						ALLEGRO_ALIGN_CENTRE,
 						help);
