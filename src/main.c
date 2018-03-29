@@ -44,8 +44,8 @@ const char *info_format =
 	"x: %f\n"
 	"y: %f\n"
 	"angle: %f (%f degrees)\n"
-	"velX: %f\n"
-	"velY: %f";
+	"velX: %f px/sec\n"
+	"velY: %f px/sec";
 
 int main() {
 	char title[32];
@@ -128,7 +128,7 @@ int main() {
 						ship.x, ship.y,
 						ship.direction,
 						RAD_TO_DEG(ship.direction),
-						ship.velX, ship.velY);
+						ship.velX * FPS, ship.velY * FPS);
 				al_draw_multiline_text(font,
 						al_map_rgb(0xFF, 0xFF, 0xFF),
 						5, 5, WINDOW_WIDTH, 10.0f,
