@@ -113,12 +113,9 @@ int main() {
 		{
 			if(key_is_down(KEY_RESET))
 				ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-			/*
-			 * We only run the simulation when the timer goes off so it's
-			 * running at a consistent rate, rather than dependent on random
-			 * events.
-			 */
-			ship_update(&ship);
+			else
+				ship_update(&ship);
+
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			ship_draw(&ship);
 			if(show_info)
