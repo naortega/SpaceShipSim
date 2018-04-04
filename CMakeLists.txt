@@ -34,9 +34,9 @@ set(CMAKE_C_FLAGS_RELWITHDEBINFO "-g -O3 -ffast-math")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(ALLEG5 REQUIRED allegro-5)
-pkg_check_modules(ALLEG5-PRIM REQUIRED allegro_primitives-5)
-pkg_check_modules(ALLEG5-FONT REQUIRED allegro_font-5)
+pkg_check_modules(ALLEG5 REQUIRED allegro-5 allegro-5.0)
+pkg_check_modules(ALLEG5-PRIM REQUIRED allegro_primitives-5 allegro_primitives-5.0)
+pkg_check_modules(ALLEG5-FONT REQUIRED allegro_font-5 allegro_font-5.0)
 
 include_directories(
 	SYSTEM ${ALLEG5_INCLUDE_DIRS})
