@@ -104,6 +104,8 @@ int main() {
 	redraw = 1;
 	show_help = 1;
 	show_info = 1;
+	int paused = 0;
+	int old_paused = 0;
 	while(run)
 	{
 		handle_event();
@@ -111,10 +113,18 @@ int main() {
 		// only redraw or run simulation if the timer event has occurred
 		if(redraw)
 		{
-			if(key_is_down(KEY_RESET))
-				ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-			else
-				ship_update(&ship);
+			if(paused == old_paused && key_is_down(KEY_PAUSE))
+				paused = !paused;
+			else if(paused != old_paused && !key_is_down(KEY_PAUSE))
+				old_paused = paused;
+
+			if(!paused)
+			{
+				if(key_is_down(KEY_RESET))
+					ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+				else
+					ship_update(&ship);
+			}
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			ship_draw(&ship);

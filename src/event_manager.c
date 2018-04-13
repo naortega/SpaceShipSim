@@ -101,6 +101,9 @@ void set_key(int keycode, int value) {
 		case ALLEGRO_KEY_F:
 			keys[KEY_FULLSCREEN] = value;
 			break;
+		case ALLEGRO_KEY_P:
+			keys[KEY_PAUSE] = value;
+			break;
 		default:
 			break;
 	}
