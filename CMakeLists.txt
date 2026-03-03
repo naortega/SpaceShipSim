@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.10)
 project(SpaceShipSim C)
 
 set(TARGET_NAME "spaceshipsim")
-set(TARGET_VERSION "0.3")
+set(TARGET_VERSION "0.4")
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "release")
@@ -48,8 +48,7 @@ set(SRCS
 
 add_definitions(-DVERSION="${TARGET_VERSION}")
 
-if(${CMAKE_BUILD_TYPE} STREQUAL "debug" OR
-		${CMAKE_BUILD_TYPE} STREQUAL "relwithdebinfo")
+if(${CMAKE_BUILD_TYPE} STREQUAL "debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "relwithdebinfo")
 	add_definitions(-DDEBUG)
 else()
 	add_definitions(-DNDEBUG)
