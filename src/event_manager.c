@@ -113,29 +113,32 @@ void handle_event() {
 	ALLEGRO_EVENT evnt;
 	al_wait_for_event(event_queue, &evnt);
 
-	switch(evnt.type)
+	do
 	{
-		case ALLEGRO_EVENT_TIMER:
-			redraw = 1;
-			break;
-		case ALLEGRO_EVENT_DISPLAY_CLOSE:
-			run = 0;
-			break;
-		case ALLEGRO_EVENT_KEY_DOWN:
-			if(evnt.keyboard.keycode == ALLEGRO_KEY_H)
-				show_help = !show_help;
-			else if(evnt.keyboard.keycode == ALLEGRO_KEY_I)
-				show_info = !show_info;
-			else if(evnt.keyboard.keycode == ALLEGRO_KEY_Q ||
-					evnt.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+		switch(evnt.type)
+		{
+			case ALLEGRO_EVENT_TIMER:
+				redraw = 1;
+				break;
+			case ALLEGRO_EVENT_DISPLAY_CLOSE:
 				run = 0;
-			else
-				set_key(evnt.keyboard.keycode, 1);
-			break;
-		case ALLEGRO_EVENT_KEY_UP:
-			set_key(evnt.keyboard.keycode, 0);
-			break;
-	}
+				break;
+			case ALLEGRO_EVENT_KEY_DOWN:
+				if(evnt.keyboard.keycode == ALLEGRO_KEY_H)
+					show_help = !show_help;
+				else if(evnt.keyboard.keycode == ALLEGRO_KEY_I)
+					show_info = !show_info;
+				else if(evnt.keyboard.keycode == ALLEGRO_KEY_Q ||
+						evnt.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+					run = 0;
+				else
+					set_key(evnt.keyboard.keycode, 1);
+				break;
+			case ALLEGRO_EVENT_KEY_UP:
+				set_key(evnt.keyboard.keycode, 0);
+				break;
+		}
+	} while(al_get_next_event(event_queue, &evnt));
 }
 
 int key_is_down(int code) {

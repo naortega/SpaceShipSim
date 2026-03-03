@@ -38,6 +38,7 @@ const char *help =
 	"P - pause/unpause the simulation\n"
 	"I - show/hide simulation information\n"
 	"H - show/hide this help information\n"
+	"F - toggle fullscreen\n"
 	"Q/ESC - quit";
 
 const char *info_format =
@@ -107,6 +108,7 @@ int main() {
 	show_info = 1;
 	int paused = 0;
 	int old_paused = 0;
+	int just_toggled_fullscreen = 0;
 	while(run)
 	{
 		handle_event();
@@ -125,6 +127,23 @@ int main() {
 					ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 				else
 					ship_update(&ship);
+			}
+
+			if (key_is_down(KEY_FULLSCREEN) && !just_toggled_fullscreen)
+			{
+				if(al_get_display_flags(display) & ALLEGRO_FULLSCREEN_WINDOW)
+				{
+					al_set_display_flag(display, ALLEGRO_FULLSCREEN_WINDOW, 0);
+				}
+				else
+				{
+					al_set_display_flag(display, ALLEGRO_FULLSCREEN_WINDOW, 1);
+				}
+				just_toggled_fullscreen = 1;
+			}
+			else if (!key_is_down(KEY_FULLSCREEN) && just_toggled_fullscreen)
+			{
+				just_toggled_fullscreen = 0;
 			}
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
