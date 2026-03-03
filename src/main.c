@@ -20,6 +20,11 @@
 #include "event_manager.h"
 #include "ship.h"
 
+int run;
+int redraw;
+int show_help;
+int show_info;
+
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
@@ -45,10 +50,6 @@ const char *info_format =
 	"velY: %f px/sec";
 
 int main() {
-	int run;
-	int redraw;
-	int show_help;
-	int show_info;
 	char title[32];
 	sprintf(title, "SpaceShipSim v%s", VERSION);
 	puts(title);
