@@ -37,4 +37,4 @@ address: [nicolas@ortegas.org](mailto:nicolas@ortegas.org).
 
 As educational software, unless otherwise noted, all files are licensed under
 the terms & conditions of the GNU General Public License version 3 or greater
-(see `LICENSE' file for more information).
+(see the [license file](LICENSE) for more information).
