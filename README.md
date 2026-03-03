@@ -8,9 +8,9 @@ purposes.
 
 In order to build this program you will require the following dependencies:
 
-- GNU GCC ([https://gcc.gnu.org/])
-- CMake ([https://cmake.org/])
-- Allegro 5 ([http://liballeg.org/])
+- A C compiler that supports C99 or higher
+- CMake 3.10 or higher
+- Allegro 5
 
 You can then compile the program via the following commands:
 
@@ -23,7 +23,7 @@ make
 This will create a release build with compiler optimizations. If you would like
 a debug build then pass the `-DCMAKE_BUILD_TYPE=debug` flag to the `cmake`
 command. If you would like to install then run `cmake` with the additional flag
-`-DCMAKE\_INSTALL\_PREFIX=\<install\_dir\>`. If you are installing as a user then
+`-DCMAKE_INSTALL_PREFIX=<install_dir>`. If you are installing as a user then
 you may want to set the installation prefix to `/usr/local/`, and if you're
 packaging then please consult your distribution's policies. With this you
 should be able to run the `make install' target and install the binary.
