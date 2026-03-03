@@ -31,7 +31,7 @@ should be able to run the `make install' target and install the binary.
 ## Contributing
 
 If you would like to contribute to the project, send a patch file to my e-mail
-address: <nortega@themusicinnoise.net>.
+address: [nicolas@ortegas.org](mailto:nicolas@ortegas.org).
 
 ## License
 
