@@ -35,6 +35,7 @@ const char *help =
 	"LEFT/RIGHT - turn the ship\n"
 	"UP/DOWN - accelerate/reverse accelerate\n"
 	"R - reset the simulation\n"
+	"P - pause/unpause the simulation\n"
 	"I - show/hide simulation information\n"
 	"H - show/hide this help information\n"
 	"Q/ESC - quit";
