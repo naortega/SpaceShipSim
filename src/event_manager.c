@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2018  Ortega Froysa, Nicolás <nortega@themusicinnoise.net>
- * Author: Ortega Froysa, Nicolás <nortega@themusicinnoise.net>
+ * Copyright (C) 2018,2026  Ortega Froysa, Nicolás <nicolas@ortegas.org>
+ * Author: Ortega Froysa, Nicolás <nicolas@ortegas.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
