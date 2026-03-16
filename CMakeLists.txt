@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.10)
 project(SpaceShipSim C)
 
 set(TARGET_NAME "spaceshipsim")
-set(TARGET_VERSION "0.4")
+set(TARGET_VERSION "0.5")
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "release")

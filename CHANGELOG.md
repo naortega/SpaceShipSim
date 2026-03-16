@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5: Effects
+
+- Added stars in background for a better sense of velocity.
+- Viewport follows ship at center.
+- Zoom functionality.
+
 ## v0.4: More functionality
 
 - Fix acceleration.
