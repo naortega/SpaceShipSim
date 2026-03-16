@@ -23,7 +23,6 @@
 #include <math.h>
 #include <assert.h>
 #include <allegro5/allegro_primitives.h>
-#include <stdio.h>
 
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
