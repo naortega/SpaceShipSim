@@ -104,6 +104,13 @@ void set_key(int keycode, int value) {
 		case ALLEGRO_KEY_P:
 			keys[KEY_PAUSE] = value;
 			break;
+		case ALLEGRO_KEY_LSHIFT:
+		case ALLEGRO_KEY_RSHIFT:
+			keys[KEY_SHIFT] = value;
+			break;
+		case ALLEGRO_KEY_Z:
+			keys[KEY_ZOOM] = value;
+			break;
 		default:
 			break;
 	}

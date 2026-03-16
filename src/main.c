@@ -39,6 +39,8 @@ const char *help =
 	"I - show/hide simulation information\n"
 	"H - show/hide this help information\n"
 	"F - toggle fullscreen\n"
+	"Z - zoom in\n"
+	"SHIFT+Z - zoom out\n"
 	"Q/ESC - quit";
 
 const char *info_format =
@@ -51,6 +53,7 @@ const char *info_format =
 
 int main() {
 	char title[32];
+	float zoom = 1.0f;
 	sprintf(title, "SpaceShipSim v%s", VERSION);
 	puts(title);
 
@@ -109,6 +112,7 @@ int main() {
 	int paused = 0;
 	int old_paused = 0;
 	int just_toggled_fullscreen = 0;
+	int zoom_pressed = 0;
 	while(run)
 	{
 		handle_event();
@@ -146,8 +150,39 @@ int main() {
 				just_toggled_fullscreen = 0;
 			}
 
+			if(key_is_down(KEY_SHIFT) && key_is_down(KEY_ZOOM) && !zoom_pressed)
+			{
+				zoom -= ZOOM_STEP;
+				if(zoom < ZOOM_MIN)
+					zoom = ZOOM_MIN;
+				zoom_pressed = 1;
+			}
+			else if(key_is_down(KEY_ZOOM) && !zoom_pressed)
+			{
+				zoom += ZOOM_STEP;
+				if(zoom > ZOOM_MAX)
+					zoom = ZOOM_MAX;
+				zoom_pressed = 1;
+			}
+			else if(!key_is_down(KEY_ZOOM) && zoom_pressed)
+			{
+				zoom_pressed = 0;
+			}
+
 			al_clear_to_color(al_map_rgb(0, 0, 0));
+
+			ALLEGRO_TRANSFORM transform;
+			al_identity_transform(&transform);
+			al_scale_transform(&transform, zoom, zoom);
+			al_translate_transform(&transform, (WINDOW_WIDTH / 2.0f) * (1.0f - 1.0f / zoom),
+					(WINDOW_HEIGHT / 2.0f) * (1.0f - 1.0f / zoom));
+			al_use_transform(&transform);
+
 			ship_draw(&ship);
+
+			al_identity_transform(&transform);
+			al_use_transform(&transform);
+
 			if(show_info)
 			{
 				char info[256];

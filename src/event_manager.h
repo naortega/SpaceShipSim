@@ -28,7 +28,9 @@ enum {
 	KEY_RESET       = 0x4,
 	KEY_FULLSCREEN  = 0x5,
 	KEY_PAUSE       = 0x6,
-	KEY_MAX         = 0x7
+	KEY_ZOOM        = 0x7,
+	KEY_SHIFT       = 0x8,
+	KEY_MAX         = 0x9
 };
 
 /**

@@ -39,6 +39,16 @@
 #	define WINDOW_HEIGHT 600
 #endif
 
+#ifndef ZOOM_MIN
+#	define ZOOM_MIN 0.25f
+#endif
+#ifndef ZOOM_MAX
+#	define ZOOM_MAX 4.0f
+#endif
+#ifndef ZOOM_STEP
+#	define ZOOM_STEP 0.1f
+#endif
+
 #include <math.h>
 #ifndef M_PI
 #	define M_PI 3.14159265f
