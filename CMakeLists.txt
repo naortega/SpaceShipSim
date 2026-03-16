@@ -44,7 +44,8 @@ include_directories(
 set(SRCS
 	src/event_manager.c
 	src/main.c
-	src/ship.c)
+	src/ship.c
+	src/starfield.c)
 
 add_definitions(-DVERSION="${TARGET_VERSION}")
 

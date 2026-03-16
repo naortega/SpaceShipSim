@@ -19,6 +19,7 @@
 #include "globals.h"
 #include "event_manager.h"
 #include "ship.h"
+#include "starfield.h"
 
 int run;
 int redraw;
@@ -179,6 +180,7 @@ int main() {
 					WINDOW_HEIGHT / 2.0f - ship.y * zoom);
 			al_use_transform(&transform);
 
+			starfield_draw(ship.x, ship.y, zoom);
 			ship_draw(&ship);
 
 			al_identity_transform(&transform);
