@@ -24,5 +24,7 @@
  * @param camera_x The x position of the camera center.
  * @param camera_y The y position of the camera center.
  * @param zoom The zoom level (scale factor).
+ * @param width The display width in pixels.
+ * @param height The display height in pixels.
  */
-void starfield_draw(float camera_x, float camera_y, float zoom);
+void starfield_draw(float camera_x, float camera_y, float zoom, float width, float height);

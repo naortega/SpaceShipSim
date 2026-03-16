@@ -51,9 +51,9 @@ static void generate_chunk_stars(int chunk_x, int chunk_y) {
 	}
 }
 
-void starfield_draw(float camera_x, float camera_y, float zoom) {
-	float view_width = WINDOW_WIDTH / zoom;
-	float view_height = WINDOW_HEIGHT / zoom;
+void starfield_draw(float camera_x, float camera_y, float zoom, float width, float height) {
+	float view_width = width / zoom;
+	float view_height = height / zoom;
 
 	float left = camera_x - view_width / 2.0f;
 	float right = camera_x + view_width / 2.0f;

@@ -55,6 +55,9 @@ const char *info_format =
 int main() {
 	char title[32];
 	float zoom = 1.0f;
+	float display_width = WINDOW_WIDTH;
+	float display_height = WINDOW_HEIGHT;
+
 	sprintf(title, "SpaceShipSim v%s", VERSION);
 	puts(title);
 
@@ -121,6 +124,12 @@ int main() {
 		// only redraw or run simulation if the timer event has occurred
 		if(redraw)
 		{
+			if(just_toggled_fullscreen)
+			{
+				display_width = al_get_display_width(display);
+				display_height = al_get_display_height(display);
+			}
+
 			if(paused == old_paused && key_is_down(KEY_PAUSE))
 				paused = !paused;
 			else if(paused != old_paused && !key_is_down(KEY_PAUSE))
@@ -176,11 +185,11 @@ int main() {
 			al_identity_transform(&transform);
 			al_scale_transform(&transform, zoom, zoom);
 			al_translate_transform(&transform,
-					WINDOW_WIDTH / 2.0f - ship.x * zoom,
-					WINDOW_HEIGHT / 2.0f - ship.y * zoom);
+					display_width / 2.0f - ship.x * zoom,
+					display_height / 2.0f - ship.y * zoom);
 			al_use_transform(&transform);
 
-			starfield_draw(ship.x, ship.y, zoom);
+			starfield_draw(ship.x, ship.y, zoom, display_width, display_height);
 			ship_draw(&ship);
 
 			al_identity_transform(&transform);
@@ -196,7 +205,7 @@ int main() {
 						ship.velX * FPS, ship.velY * FPS);
 				al_draw_multiline_text(font,
 						al_map_rgb(0xFF, 0xFF, 0xFF),
-						5, 5, WINDOW_WIDTH, 10.0f,
+						5, 5, (int)display_width, 10.0f,
 						ALLEGRO_ALIGN_LEFT,
 						info);
 			}
@@ -205,8 +214,8 @@ int main() {
 			{
 				al_draw_multiline_text(font,
 						al_map_rgb(0xFF, 0xFF, 0xFF),
-						(float)WINDOW_WIDTH / 2, (float)WINDOW_HEIGHT / 2 - 50,
-						WINDOW_WIDTH, 10.0f,
+						display_width / 2, display_height / 2 - 50,
+						(int)display_width, 10.0f,
 						ALLEGRO_ALIGN_CENTRE,
 						help);
 			}
