@@ -174,8 +174,9 @@ int main() {
 			ALLEGRO_TRANSFORM transform;
 			al_identity_transform(&transform);
 			al_scale_transform(&transform, zoom, zoom);
-			al_translate_transform(&transform, (WINDOW_WIDTH / 2.0f) * (1.0f - 1.0f / zoom),
-					(WINDOW_HEIGHT / 2.0f) * (1.0f - 1.0f / zoom));
+			al_translate_transform(&transform,
+					WINDOW_WIDTH / 2.0f - ship.x * zoom,
+					WINDOW_HEIGHT / 2.0f - ship.y * zoom);
 			al_use_transform(&transform);
 
 			ship_draw(&ship);
