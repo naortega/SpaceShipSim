@@ -37,7 +37,7 @@ struct ship {
  * @param x Initial x position of the ship.
  * @param y Initial y position of the ship.
  */
-void ship_init(struct ship *ship, int x, int y);
+void ship_init(struct ship *ship, float x, float y);
 
 /**
  * @brief Updates the ship's variables according to keyboard

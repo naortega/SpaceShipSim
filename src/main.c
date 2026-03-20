@@ -138,7 +138,7 @@ int main() {
 			if(!paused)
 			{
 				if(key_is_down(KEY_RESET))
-					ship_init(&ship, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+					ship_init(&ship, (float)WINDOW_WIDTH / 2, (float)WINDOW_HEIGHT / 2);
 				else
 					ship_update(&ship);
 			}

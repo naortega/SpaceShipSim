@@ -26,7 +26,7 @@
 
 #define SHIP_RADIUS 10.0f  // radius of the ship in pixels
 
-void ship_init(struct ship *ship, int x, int y) {
+void ship_init(struct ship *ship, float x, float y) {
 	assert(ship);
 	ship->x = x;
 	ship->y = y;
