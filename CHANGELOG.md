@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.6: Planetary Masses
+
+- Add planetary masses.
+- Modify some of the constants.
+
 ## v0.5: Effects
 
 - Added stars in background for a better sense of velocity.
