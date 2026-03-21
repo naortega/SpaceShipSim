@@ -20,6 +20,7 @@
 #include "event_manager.h"
 #include "ship.h"
 #include "starfield.h"
+#include "planet.h"
 
 int run;
 int redraw;
@@ -106,6 +107,10 @@ int main() {
 	struct ship ship;
 	ship_init(&ship, 400, 300);
 
+	// initialize the planet
+	struct planet planet;
+	planet_init(&planet, 400.0f, 300.0f, 250.0f);
+
 	ALLEGRO_FONT *font = al_create_builtin_font();
 
 	// begin running the simulation
@@ -140,7 +145,11 @@ int main() {
 				if(key_is_down(KEY_RESET))
 					ship_init(&ship, (float)WINDOW_WIDTH / 2, (float)WINDOW_HEIGHT / 2);
 				else
-					ship_update(&ship);
+				{
+					float gravity_x, gravity_y;
+					planet_get_gravity(&planet, ship.x, ship.y, &gravity_x, &gravity_y);
+					ship_update(&ship, gravity_x, gravity_y);
+				}
 			}
 
 			if (key_is_down(KEY_FULLSCREEN) && !just_toggled_fullscreen)
@@ -190,6 +199,7 @@ int main() {
 			al_use_transform(&transform);
 
 			starfield_draw(ship.x, ship.y, zoom, display_width, display_height);
+			planet_draw(&planet);
 			ship_draw(&ship);
 
 			al_identity_transform(&transform);

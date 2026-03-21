@@ -41,11 +41,13 @@ void ship_init(struct ship *ship, float x, float y);
 
 /**
  * @brief Updates the ship's variables according to keyboard
- * input.
+ * input and gravitational forces.
  *
  * @param ship A pointer to the ship object.
+ * @param gravity_x Gravitational acceleration in x direction.
+ * @param gravity_y Gravitational acceleration in y direction.
  */
-void ship_update(struct ship *ship);
+void ship_update(struct ship *ship, float gravity_x, float gravity_y);
 
 /**
  * @brief Draw the ship.

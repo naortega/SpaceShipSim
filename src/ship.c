@@ -34,7 +34,7 @@ void ship_init(struct ship *ship, float x, float y) {
 	ship->direction = 0;
 }
 
-void ship_update(struct ship *ship) {
+void ship_update(struct ship *ship, float gravity_x, float gravity_y) {
 	assert(ship);
 
 	if(key_is_down(KEY_RIGHT))
@@ -59,6 +59,10 @@ void ship_update(struct ship *ship) {
 		ship->velX -= cos(ship->direction) * (ACCEL / 2);
 		ship->velY -= sin(ship->direction) * (ACCEL / 2);
 	}
+
+	// Apply gravitational acceleration
+	ship->velX += gravity_x;
+	ship->velY += gravity_y;
 
 	ship->x += ship->velX;
 	ship->y += ship->velY;

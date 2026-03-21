@@ -44,6 +44,7 @@ include_directories(
 set(SRCS
 	src/event_manager.c
 	src/main.c
+	src/planet.c
 	src/ship.c
 	src/starfield.c)
 
