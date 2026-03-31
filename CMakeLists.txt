@@ -15,10 +15,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.10)
-project(SpaceShipSim C)
-
-set(TARGET_NAME "spaceshipsim")
-set(TARGET_VERSION "0.6")
+project(spaceshipsim
+	VERSION 0.6
+	SPDX_LICENSE "GPL-3.0-or-later"
+	DESCRIPTION "A simulation of a 2D space ship in the frictionless environment of space."
+	HOMEPAGE_URL "https://code.ortegas.org/nortega/spaceshipsim"
+	LANGUAGES C)
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "release")
@@ -42,13 +44,22 @@ include_directories(
 	SYSTEM ${ALLEG5_INCLUDE_DIRS})
 
 set(SRCS
-	src/event_manager.c
-	src/main.c
-	src/planet.c
-	src/ship.c
-	src/starfield.c)
+	"src/event_manager.c"
+	"src/main.c"
+	"src/planet.c"
+	"src/ship.c"
+	"src/starfield.c"
+)
 
-add_definitions(-DVERSION="${TARGET_VERSION}")
+set(HDRS
+	"src/event_manager.h"
+	"src/globals.h"
+	"src/planet.h"
+	"src/ship.h"
+	"src/starfield.h"
+)
+
+add_definitions(-DVERSION="${PROJECT_VERSION}")
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "debug" OR ${CMAKE_BUILD_TYPE} STREQUAL "relwithdebinfo")
 	add_definitions(-DDEBUG)
@@ -56,14 +67,14 @@ else()
 	add_definitions(-DNDEBUG)
 endif()
 
-add_executable(${TARGET_NAME} ${SRCS})
+add_executable(${PROJECT_NAME} ${SRCS} ${HDRS})
 
-target_link_libraries(${TARGET_NAME}
+target_link_libraries(${PROJECT_NAME}
 	m  # math library
 	${ALLEG5_LIBRARIES}
 	${ALLEG5-PRIM_LIBRARIES}
 	${ALLEG5-FONT_LIBRARIES})
 
-install(TARGETS ${TARGET_NAME}
+install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin/
 	CONFIGURATIONS release minsizerel)
