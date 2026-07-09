@@ -18,45 +18,44 @@
 
 #pragma once
 
+#include "ship.h"
+#include "vec.h"
+
 /**
  * Function pointer type for calculating planet mass.
  * Takes no parameters and returns the mass value.
  */
 typedef float (*planet_mass_func)(void);
 
-struct planet {
-	float x, y;       ///< The x and y coordinates of the planet center.
-	float mass;       ///< The mass of the planet.
-	float radius;     ///< The radius of the planet (derived from mass).
+class Planet {
+private:
+	Vec<float> pos;      ///< The x and y coordinates of the planet center.
+	const float mass;    ///< The mass of the planet.
+	const float radius;  ///< The radius of the planet (derived from mass).
+
+public:
+	/**
+	 * @brief Initialize a planet at a position with a specified mass.
+	 *
+	 * @param x Initial x position of the planet center.
+	 * @param y Initial y position of the planet center.
+	 * @param mass The mass of the planet.
+	 */
+	Planet(const float x, const float y, const float mass);
+
+	/**
+	 * @brief Calculate the gravitational acceleration on a ship at a given position.
+	 *
+	 * Returns the acceleration vector components due to the planet's gravity.
+	 *
+	 * @param ship Reference to ship.
+	 *
+	 * @returns A Vec<float> representing the gravitational acceleration (ax, ay).
+	 */
+	Vec<float> getGravity(const Ship &ship) const;
+
+	/**
+	 * @brief Draw the planet.
+	 */
+	void draw();
 };
-
-/**
- * @brief Initialize a planet at a position with a specified mass.
- *
- * @param planet A pointer to the planet object.
- * @param x Initial x position of the planet center.
- * @param y Initial y position of the planet center.
- * @param mass The mass of the planet.
- */
-void planet_init(struct planet *planet, float x, float y, float mass);
-
-/**
- * @brief Calculate the gravitational acceleration on a ship at a given position.
- *
- * Returns the acceleration vector components due to the planet's gravity.
- *
- * @param planet A pointer to the planet object.
- * @param ship_x X position of the ship.
- * @param ship_y Y position of the ship.
- * @param accel_x Pointer to store the x component of acceleration.
- * @param accel_y Pointer to store the y component of acceleration.
- */
-void planet_get_gravity(struct planet *planet, float ship_x, float ship_y,
-						float *accel_x, float *accel_y);
-
-/**
- * @brief Draw the planet.
- *
- * @param planet Planet object to draw.
- */
-void planet_draw(struct planet *planet);

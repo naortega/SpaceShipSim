@@ -26,8 +26,8 @@
 #include <assert.h>
 #include <allegro5/allegro.h>
 
-static ALLEGRO_EVENT_QUEUE *event_queue;
-static ALLEGRO_TIMER *timer;
+static ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+static ALLEGRO_TIMER *timer = NULL;
 static int keys[KEY_MAX];
 
 int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
@@ -35,24 +35,23 @@ int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
 	if(!al_install_keyboard())
 		return 0;
 #ifdef DEBUG
-	puts("Initialized keyboard.");
+	puts("[DEBUG] Initialized keyboard.");
 #endif
 
 	timer = al_create_timer(1.0f / FPS);
 	if(!timer)
 		return 0;
 #ifdef DEBUG
-	puts("Initialized timer.");
+	puts("[DEBUG] Initialized timer.");
 #endif
 
 	event_queue = al_create_event_queue();
-	if(!event_queue)
-	{
+	if(!event_queue) {
 		al_destroy_timer(timer);
 		return 0;
 	}
 #ifdef DEBUG
-	puts("Initialized event queue.");
+	puts("[DEBUG] Initialized event queue.");
 #endif
 	al_register_event_source(event_queue,
 			al_get_display_event_source(display));
@@ -70,19 +69,28 @@ int evnt_mngr_init(ALLEGRO_DISPLAY *display) {
 }
 
 void evnt_mngr_deinit() {
-	al_destroy_timer(timer);
+	if(al_is_keyboard_installed()) {
+		al_uninstall_keyboard();
 #ifdef DEBUG
-	puts("Destroyed timer.");
+		puts("[DEBUG] Uninstalled keyboard.");
 #endif
-	al_destroy_event_queue(event_queue);
+	}
+	if(timer) {
+		al_destroy_timer(timer);
 #ifdef DEBUG
-	puts("Destroyed event queue.");
+		puts("[DEBUG] Destroyed timer.");
 #endif
+	}
+	if(event_queue) {
+		al_destroy_event_queue(event_queue);
+#ifdef DEBUG
+		puts("[DEBUG] Destroyed event queue.");
+#endif
+	}
 }
 
 void set_key(int keycode, int value) {
-	switch(keycode)
-	{
+	switch(keycode) {
 		case ALLEGRO_KEY_UP:
 			keys[KEY_UP] = value;
 			break;
@@ -120,10 +128,8 @@ void handle_event() {
 	ALLEGRO_EVENT evnt;
 	al_wait_for_event(event_queue, &evnt);
 
-	do
-	{
-		switch(evnt.type)
-		{
+	do {
+		switch(evnt.type) {
 			case ALLEGRO_EVENT_TIMER:
 				redraw = 1;
 				break;

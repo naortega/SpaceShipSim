@@ -18,6 +18,10 @@
 
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Draw stars in the visible area of the starfield.
  *
@@ -28,3 +32,7 @@
  * @param height The display height in pixels.
  */
 void starfield_draw(float camera_x, float camera_y, float zoom, float width, float height);
+
+#ifdef __cplusplus
+}
+#endif

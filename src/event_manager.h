@@ -20,6 +20,10 @@
 
 #include <allegro5/allegro.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum {
 	KEY_UP          = 0x0,
 	KEY_DOWN        = 0x1,
@@ -62,3 +66,7 @@ void handle_event();
  * @return If down 1 will be returned, else 0.
  */
 int key_is_down(int code);
+
+#ifdef __cplusplus
+}
+#endif

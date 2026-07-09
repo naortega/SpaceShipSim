@@ -20,7 +20,7 @@ project(spaceshipsim
 	SPDX_LICENSE "GPL-3.0-or-later"
 	DESCRIPTION "A simulation of a 2D space ship in the frictionless environment of space."
 	HOMEPAGE_URL "https://code.ortegas.org/nortega/spaceshipsim"
-	LANGUAGES C)
+	LANGUAGES C CXX)
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "release")
@@ -35,6 +35,12 @@ set(CMAKE_C_FLAGS_RELEASE "-O3 -ffast-math")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-g -O3 -ffast-math")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
 
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -ffast-math")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-g -O3 -ffast-math")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os")
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(ALLEG5 REQUIRED allegro-5>=5.1.9)
 pkg_check_modules(ALLEG5-PRIM REQUIRED allegro_primitives-5)
@@ -45,9 +51,9 @@ include_directories(
 
 set(SRCS
 	"src/event_manager.c"
-	"src/main.c"
-	"src/planet.c"
-	"src/ship.c"
+	"src/main.cpp"
+	"src/planet.cpp"
+	"src/ship.cpp"
 	"src/starfield.c"
 )
 
@@ -57,6 +63,7 @@ set(HDRS
 	"src/planet.h"
 	"src/ship.h"
 	"src/starfield.h"
+	"src/vec.h"
 )
 
 add_definitions(-DVERSION="${PROJECT_VERSION}")

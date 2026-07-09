@@ -17,62 +17,41 @@
  */
 
 #include "planet.h"
-#include <math.h>
-#include <assert.h>
+#include <cmath>
+#include <cassert>
 #include <allegro5/allegro_primitives.h>
 
-#define GRAVITY_CONSTANT 1.0f  // Gravitational constant scaled for simulation
+#define GRAVITY_CONSTANT 1.0f    // Gravitational constant scaled for simulation
 #define SHIP_MASS 1.0f           // Assumed constant ship mass
 #define MASS_TO_RADIUS 1.5f      // Radius scale factor: radius = MASS_TO_RADIUS * mass^(1/3)
 
-void planet_init(struct planet *planet, float x, float y, float mass) {
-	assert(planet);
+Planet::Planet(const float x, const float y, const float mass) :
+	pos(x, y), mass(mass), radius(MASS_TO_RADIUS * cbrtf(mass))
+{}
 
-	planet->x = x;
-	planet->y = y;
-	planet->mass = mass;
-	planet->radius = MASS_TO_RADIUS * cbrtf(planet->mass);
-}
+Vec<float> Planet::getGravity(const Ship &ship) const {
+	const Vec<float> distance = this->pos - ship.getPos();
 
-void planet_get_gravity(struct planet *planet, float ship_x, float ship_y,
-						float *accel_x, float *accel_y) {
-	assert(planet);
-	assert(accel_x);
-	assert(accel_y);
-
-	float dx = planet->x - ship_x;
-	float dy = planet->y - ship_y;
-	float distance = sqrtf(dx * dx + dy * dy);
-
-	if(distance < planet->radius) {
-		*accel_x = 0.0f;
-		*accel_y = 0.0f;
-		return;
-	}
+	if(distance.length() < this->radius)
+		return Vec<float>(0, 0);
 
 	// F = G * m1 * m2 / r^2
-	float force = GRAVITY_CONSTANT * SHIP_MASS * planet->mass / (distance * distance);
+	const float force = GRAVITY_CONSTANT * SHIP_MASS * this->mass / (distance.length() * distance.length());
 
-	// a = F / m_ship = G * m_planet / r^2
-	float acceleration = force / SHIP_MASS;
+	// a = F / m_ship = G * m_this / r^2
+	const float acceleration = force / SHIP_MASS;
 
 	// Normalize direction and apply acceleration
-	float norm_x = dx / distance;
-	float norm_y = dy / distance;
-
-	*accel_x = norm_x * acceleration;
-	*accel_y = norm_y * acceleration;
+	return distance.normalized() * acceleration;
 }
 
-void planet_draw(struct planet *planet) {
-	assert(planet);
-
+void Planet::draw() {
 	// Color intensity based on mass (brighter = more massive)
-	float color_scale = fminf(1.0f, planet->mass / 1000.0f);
+	float color_scale = fminf(1.0f, this->mass / 1000.0f);
 	int r = (int)(100 + 155 * color_scale);
 	int g = (int)(100 + 50 * color_scale);
 	int b = (int)(150 - 100 * color_scale);
 
-	al_draw_filled_circle(planet->x, planet->y, planet->radius,
-			al_map_rgb(r, g, b));
+	al_draw_filled_circle(this->pos.x, this->pos.y, this->radius,
+						  al_map_rgb(r, g, b));
 }

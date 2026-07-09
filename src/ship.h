@@ -18,40 +18,56 @@
 
 #pragma once
 
+#include "vec.h"
 #include <allegro5/allegro.h>
 
-struct ship {
-	float x, y; ///< The x and y coordinates of the ship.
-	float velX, velY; ///< The x and y velocities of the ship.
+class Ship {
+private:
+	/// Position of the ship in pixels.
+	Vec<float> pos;
+	/// Velocity of the ship in pixels per frame.
+	Vec<float> vel;
 	/**
 	 * The direction that the ship is facing in radians, where
 	 * 0 is right facing.
 	 */
 	float direction;
+
+public:
+	/**
+	 * @brief Initialize ship.
+	 *
+	 * @param x Initial X position.
+	 * @param y Initial Y position.
+	 */
+	Ship(const float x, const float y);
+
+	/**
+	 * @brief Updates the ship's variables according to keyboard
+	 * input and gravitational forces.
+	 *
+	 * @param grav Vector of gravitational acceleration in pixels per frame squared.
+	 */
+	void update(const Vec<float> &grav);
+
+	/**
+	 * @brief Reset ship to position.
+	 *
+	 * @param x X position to reset to.
+	 * @param y Y position to reset to.
+	 */
+	inline void reset(float x, float y) {
+		this->pos.set(x, y);
+		this->vel.set(0, 0);
+		this->direction = 0;
+	}
+
+	/**
+	 * @brief Draw the ship.
+	 */
+	void draw() const;
+
+	inline Vec<float> getPos() const { return pos; }
+	inline Vec<float> getVel() const { return vel; }
+	inline float getDirection() const { return direction; }
 };
-
-/**
- * @brief Initialize the ship at a position.
- *
- * @param ship A pointer to the ship object.
- * @param x Initial x position of the ship.
- * @param y Initial y position of the ship.
- */
-void ship_init(struct ship *ship, float x, float y);
-
-/**
- * @brief Updates the ship's variables according to keyboard
- * input and gravitational forces.
- *
- * @param ship A pointer to the ship object.
- * @param gravity_x Gravitational acceleration in x direction.
- * @param gravity_y Gravitational acceleration in y direction.
- */
-void ship_update(struct ship *ship, float gravity_x, float gravity_y);
-
-/**
- * @brief Draw the ship.
- *
- * @param ship Ship object to draw.
- */
-void ship_draw(struct ship *ship);

@@ -18,6 +18,11 @@
 
 #pragma once
 
+#include <math.h>
+#ifndef M_PI
+#	define M_PI 3.14159265f
+#endif
+
 #ifndef VERSION
 #	define VERSION "[version]"
 #endif
@@ -49,16 +54,19 @@
 #	define ZOOM_STEP 0.1f
 #endif
 
-#include <math.h>
-#ifndef M_PI
-#	define M_PI 3.14159265f
-#endif
-
 #define RAD_TO_DEG(x) (x * 180 / M_PI)
 
 #include <allegro5/allegro.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern int redraw; ///< Whether or not to redraw the screen.
 extern int run; ///< Whether or not to continue running the simulation.
 extern int show_help; ///< Whether or not to show the help info.
 extern int show_info; ///< Whether or not to show simulation info.
+
+#ifdef __cplusplus
+}
+#endif

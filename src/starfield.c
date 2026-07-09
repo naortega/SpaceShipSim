@@ -17,7 +17,6 @@
  */
 
 #include "starfield.h"
-#include "globals.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -42,8 +41,7 @@ static void generate_chunk_stars(int chunk_x, int chunk_y) {
 	float base_x = chunk_x * CHUNK_SIZE;
 	float base_y = chunk_y * CHUNK_SIZE;
 
-	for(int i = 0; i < STARS_PER_CHUNK; ++i)
-	{
+	for(int i = 0; i < STARS_PER_CHUNK; ++i) {
 		float star_x = base_x + (float)(rand() % CHUNK_SIZE);
 		float star_y = base_y + (float)(rand() % CHUNK_SIZE);
 
@@ -65,10 +63,8 @@ void starfield_draw(float camera_x, float camera_y, float zoom, float width, flo
 	int chunk_top = (int)floor(top / CHUNK_SIZE);
 	int chunk_bottom = (int)floor(bottom / CHUNK_SIZE);
 
-	for(int cy = chunk_top; cy <= chunk_bottom; ++cy)
-	{
-		for(int cx = chunk_left; cx <= chunk_right; ++cx)
-		{
+	for(int cy = chunk_top; cy <= chunk_bottom; ++cy) {
+		for(int cx = chunk_left; cx <= chunk_right; ++cx) {
 			generate_chunk_stars(cx, cy);
 		}
 	}
