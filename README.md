@@ -8,7 +8,7 @@ purposes.
 
 In order to build this program you will require the following dependencies:
 
-- A C compiler that supports C99 or higher
+- GNU C and C++ compiler that supports C++11
 - CMake 3.10 or higher
 - Allegro 5
 

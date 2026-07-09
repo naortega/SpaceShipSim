@@ -16,7 +16,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 project(spaceshipsim
-	VERSION 0.6
+	VERSION 1.0
 	SPDX_LICENSE "GPL-3.0-or-later"
 	DESCRIPTION "A simulation of a 2D space ship in the frictionless environment of space."
 	HOMEPAGE_URL "https://code.ortegas.org/nortega/spaceshipsim"

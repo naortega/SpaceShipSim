@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0: Port to C++
+
+- Port the bulk of the codebase to C++ for simplicity.
+
 ## v0.6: Planetary Masses
 
 - Add planetary masses.
